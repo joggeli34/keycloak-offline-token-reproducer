@@ -1,0 +1,129 @@
+{
+  "realm": "testtenant",
+  "enabled": true,
+  "users": [{
+    "id" : "7c356c97-1d59-4b49-8977-f706c26b9830",
+    "username" : "service-account-authz-client",
+    "emailVerified" : false,
+    "createdTimestamp" : 1724075211742,
+    "enabled" : true,
+    "totp" : false,
+    "serviceAccountClientId" : "authz-client",
+    "credentials" : [ ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ ],
+    "clientRoles" : {
+      "authz-client" : [ "uma_protection" ]
+    },
+    "notBefore" : 0,
+    "groups" : [ ]
+  }],
+  "roles": {
+    "realm": [],
+    "client": {
+      "api-client": [],
+      "authz-client": [
+        {
+          "id": "3325f520-273b-43a4-8118-906f66979f64",
+          "name": "uma_protection",
+          "composite": false,
+          "clientRole": true,
+          "containerId": "985f2b49-408c-4a73-a6a9-c578fb774a2f",
+          "attributes": {}
+        }
+      ]
+    }
+  },
+  "defaultRoles": [],
+  "clients": [
+    {
+      "clientId": "api-client",
+      "enabled": true,
+      "publicClient": true,
+      "directAccessGrantsEnabled": true,
+      "implicitFlowEnabled": false,
+      "standardFlowEnabled": true,
+      "surrogateAuthRequired": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "secret",
+      "protocol": "openid-connect",
+      "attributes": {
+        "post.logout.redirect.uris": "+",
+        "backchannel.logout.session.required": "true",
+        "backchannel.logout.revoke.offline.tokens": "false"
+      },
+      "defaultClientScopes": [
+        "acr",
+        "roles"
+      ],
+      "optionalClientScopes": [
+        "address",
+        "phone",
+        "offline_access"
+      ],
+      "redirectUris": [
+        "*"
+      ],
+      "webOrigins": [
+        "*"
+      ]
+    },
+    {
+      "id" : "985f2b49-408c-4a73-a6a9-c578fb774a2f",
+      "clientId": "authz-client",
+      "enabled": true,
+      "publicClient": false,
+      "serviceAccountsEnabled": true,
+      "authorizationServicesEnabled": true,
+      "protocol": "openid-connect",
+      "clientAuthenticatorType": "client-secret",
+      "secret": "authz-secret",
+      "defaultClientScopes": [
+        "acr",
+        "roles"
+      ],
+      "protocolMappers": [
+        {
+          "name": "Client ID",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usersessionmodel-note-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.session.note": "clientId",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "clientId",
+            "jsonType.label": "String"
+          }
+        },
+        {
+          "name": "Client Host",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usersessionmodel-note-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.session.note": "clientHost",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "clientHost",
+            "jsonType.label": "String"
+          }
+        },
+        {
+          "name": "Client IP Address",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usersessionmodel-note-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.session.note": "clientAddress",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "clientAddress",
+            "jsonType.label": "String"
+          }
+        }
+      ]
+    }
+  ]
+}
